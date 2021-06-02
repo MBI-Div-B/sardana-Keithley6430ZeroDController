@@ -1,4 +1,4 @@
-import visa
+import pyvisa as visa
 
 from sardana import State
 from sardana.pool.controller import ZeroDController
@@ -16,12 +16,12 @@ class Keithley6430ZeroDController(ZeroDController):
 
         self.rm = visa.ResourceManager('@py')
         self.inst = self.rm.open_resource(self.resource)
-        print 'Keithley 6430 Initialization: ',
+        print ('Keithley 6430 Initialization: ')
         idn = self.inst.query('*IDN?')
         if idn:
-            print idn,
+            print (idn)
         else:
-            print 'NOT initialized!'
+            print ('NOT initialized!')
 
         # settings
         self.inst.write('*RST')
